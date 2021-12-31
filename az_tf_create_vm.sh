@@ -22,7 +22,8 @@ azenv(){
 azconfigmaintf(){
 sed -e "s/AZ_RESOURCE_GROUP_NAME/rg-${AZ_CLUSTER_GROUP_NAME}-1/g" \
          -e "s/AZ_RESOURCE_LOCATION/westus2/g" \
-         -e "s/AZ_V_NETWORK_SUBNET_NAME/${AZ_RESOURCE_GROUP_NAME}-subnet/g" \
+         -e "s/AZ_V_NETWORK_NAME/vnet-${AZ_RESOURCE_GROUP_NAME}/g" \
+         -e "s/AZ_V_NETWORK_SUBNET_NAME/vnet-${AZ_RESOURCE_GROUP_NAME}-subnet/g" \
          -e "s/AZ_V_NETWORK_IP_PUBLIC_LB_NAME/ip-pub-${AZ_RESOURCE_GROUP_NAME}-lb/g" \
          -e "s/AZ_V_NETWORK_IP_PUBLIC_LB_IPV4/${AZ_V_NETWORK_IP_PUBLIC_LB_NAME}-IpV4/g" \
          -e "s/AZ_V_NETWORK_LOAD_BALANCER_NAME/lb-${AZ_RESOURCE_GROUP_NAME}/g" \
@@ -59,7 +60,7 @@ tfgo(){
     azenv
     azconfigmaintf
     terraform init
-    terraform plan -out main.tfplan1
+    terraform plan -out main.tfplan
     terraform apply "main.tfplan1"
 }
 
