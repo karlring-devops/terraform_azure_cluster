@@ -61,7 +61,7 @@ tfgo(){
     azconfigmaintf
     terraform init
     terraform plan -out main.tfplan
-    terraform apply "main.tfplan1"
+    #terraform apply "main.tfplan1"
 }
 
 
