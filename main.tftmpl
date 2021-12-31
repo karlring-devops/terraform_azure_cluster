@@ -69,15 +69,15 @@ terraform {
    }
  }
 
- # resource "azurerm_managed_disk" "AZ_DISK_MANAGED_DATA" {
- #   count                = 2
- #   name                 = "AZ_DISK_MANAGED_DATA_NAME_EXISTING_${count.index}"
- #   location             = azurerm_resource_group.AZ_RESOURCE_GROUP.location
- #   resource_group_name = azurerm_resource_group.AZ_RESOURCE_GROUP.name
- #   storage_account_type = "Standard_LRS"
- #   create_option        = "Empty"
- #   disk_size_gb         = "1023"
- # }
+ resource "azurerm_managed_disk" "AZ_DISK_MANAGED_DATA" {
+   count                = 2
+   name                 = "AZ_DISK_MANAGED_DATA_NAME_EXISTING_${count.index}"
+   location             = azurerm_resource_group.AZ_RESOURCE_GROUP.location
+   resource_group_name = azurerm_resource_group.AZ_RESOURCE_GROUP.name
+   storage_account_type = "Standard_LRS"
+   create_option        = "Empty"
+   disk_size_gb         = "1023"
+ }
 
  resource "azurerm_availability_set" "AZ_VM_AVAILABILITY_SET" {
    name                         = "AZ_VM_AVAILABILITY_SET_NAME"
@@ -117,7 +117,7 @@ terraform {
      managed_disk_type = "Standard_LRS"
    }
 
-   Optional data disks
+   #-- Optional data disks
    storage_data_disk {
      name              = "AZ_DISK_MANAGED_DATA_NAME_NEW_${count.index}"
      managed_disk_type = "Standard_LRS"
