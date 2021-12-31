@@ -36,8 +36,23 @@ sed -e "s/AZ_RESOURCE_GROUP_NAME/rg-${AZ_CLUSTER_GROUP_NAME}-1/g" \
 main.tftmpl | tee main.tf
 }
 
+azureinstall(){
+    brew update && brew install azure-cli
+    az login
+}
 
+terraforminstall(){
+    brew tap hashicorp/tap
+    brew install hashicorp/tap/terraform
+    terraform init
+}
 
+gitreclone(){
+    cd ../
+    rm -fr terraform_azure_cluster
+    git clone https://github.com/karlring-devops/terraform_azure_cluster.git
+    cd terraform_azure_cluster
+}
 
 tfgo(){
     AZ_CLUSTER_GROUP_NAME=azclsrke2
@@ -45,6 +60,7 @@ tfgo(){
     azconfigmaintf
     terraform init
     terraform plan -out main.tfplan1
+    terraform apply "main.tfplan1"
 }
 
 
